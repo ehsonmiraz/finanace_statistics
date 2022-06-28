@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:intl/intl_browser.dart';
+
 import '../models/transaction.dart';
 
 class TransactionCard extends StatelessWidget{
@@ -20,7 +20,7 @@ class TransactionCard extends StatelessWidget{
                padding: EdgeInsets.all(5),
                margin: EdgeInsets.symmetric(vertical: 10,horizontal: 15),
                decoration: BoxDecoration(border: Border.all(
-                 color: Colors.purple,
+                 color: Theme.of(context).primaryColor,
                  width: 3,
                ),
                ),
@@ -36,7 +36,7 @@ class TransactionCard extends StatelessWidget{
                  Container(child: Text(DateFormat.yMMMd().format(tx.date),style: TextStyle(color: Colors.grey,fontSize: 10,fontWeight: FontWeight.bold),
     ),)
                          ],
-
+//DateFormat.yMMMd().format(tx.date)
            ),
            ],
          ),

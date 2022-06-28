@@ -1,3 +1,5 @@
+import 'package:google_fonts/google_fonts.dart';
+
 import './screens/home.dart';
 import 'package:flutter/material.dart';
 
@@ -8,15 +10,16 @@ class MyApp extends StatelessWidget{
   @override
   Widget build(BuildContext context){
    return MaterialApp(
-
-     home: Scaffold(
-       appBar: AppBar(
-         title: Text('Finance Calculator'),
-         actions: <Widget>[Text('action'),],
-       ),
-       body:Home(),
-
+     theme: ThemeData(
+         primarySwatch:Colors.blueGrey,
+         accentColor: Colors.teal,
+         textTheme: ThemeData.light().textTheme.copyWith(
+             headline6:GoogleFonts.acme(textStyle :TextStyle(fontSize: 12))
+         ),
+         appBarTheme: AppBarTheme(titleTextStyle:GoogleFonts.acme())
      ),
+
+     home: Home(),
    ) ;
   }
 }

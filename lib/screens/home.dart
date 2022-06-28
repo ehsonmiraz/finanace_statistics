@@ -1,11 +1,11 @@
+import 'package:google_fonts/google_fonts.dart';
+
 import 'newtransaction.dart';
 import 'transactionlist.dart';
-
 import '../models/transaction.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget{
-
 State<Home> createState() => _HomeSate() ;
 }
 
@@ -18,11 +18,21 @@ class _HomeSate extends State<Home>{
  void addTransaction(String title, double amount){
    setState((){
      transactions.add(Transaction(id: DateTime.now().toString(), title: title, amount: amount, date: DateTime.now()));
-
+     Navigator.pop(context);
    });
    }
+ void startNewTransaction( BuildContext ctx){
+   showModalBottomSheet(context: ctx, builder: (bCtx)=> NewTransaction(addTransaction: addTransaction,));
+
+ }
+
  Widget build(BuildContext context){
-    return Column(
+    return Scaffold(
+        appBar: AppBar(
+        title: Text('Expense Calculator',style: GoogleFonts.adamina(),),
+        actions: <Widget>[IconButton(onPressed:() => startNewTransaction(context), icon: Icon(Icons.add))],
+   ),
+   body:Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget> [
@@ -35,12 +45,14 @@ class _HomeSate extends State<Home>{
             elevation: 6,
           ),
         ),
-        NewTransaction(addTransaction: addTransaction,),
+
         TransactionList(transactions: transactions),
 
 
 
       ],
+    ),
+   floatingActionButton: FloatingActionButton(onPressed:() => startNewTransaction(context), child: Icon(Icons.add),),
     );
   }
 }
