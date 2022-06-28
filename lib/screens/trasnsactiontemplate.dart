@@ -24,17 +24,15 @@ class TransactionCard extends StatelessWidget{
                  width: 3,
                ),
                ),
-               child: Text('\$ ${tx.amount.toString()}' ,style: TextStyle(color: Colors.blueAccent,fontSize: 28,fontWeight: FontWeight.bold),),
-
+               child: Text('\$ ${tx.amount.toString()}' ,style: Theme.of(context).textTheme.headline4)
              ),
              Column(
                mainAxisAlignment: MainAxisAlignment.center ,
                crossAxisAlignment: CrossAxisAlignment.start,
                children: [
-                 Container(child: Text(tx.title,style: TextStyle(color: Colors.black,fontSize: 20,fontWeight: FontWeight.w500),),),
-
-                 Container(child: Text(DateFormat.yMMMd().format(tx.date),style: TextStyle(color: Colors.grey,fontSize: 10,fontWeight: FontWeight.bold),
-    ),)
+                 Container(child: Text(tx.title,style: Theme.of(context).textTheme.headline3,),),
+                 Container(child: Text(DateFormat.yMMMd().format(tx.date),style: TextStyle(color: Colors.grey,fontSize: 13,fontWeight: FontWeight.bold)),
+                 )
                          ],
 //DateFormat.yMMMd().format(tx.date)
            ),
