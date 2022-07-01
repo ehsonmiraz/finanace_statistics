@@ -11,17 +11,18 @@ class MyApp extends StatelessWidget{
   Widget build(BuildContext context){
    return MaterialApp(
      theme: ThemeData(
-         primarySwatch:Colors.blueGrey,
-         accentColor: Colors.teal,
+         primarySwatch:Colors.teal,
+         accentColor: Colors.pinkAccent,
          textTheme: ThemeData.light().textTheme.copyWith(
-             headline6:GoogleFonts.cabinSketch(textStyle :TextStyle(fontSize: 12)),
-             headline5:GoogleFonts.cabinSketch(textStyle :TextStyle(color: Theme.of(context).primaryColor,fontSize: 28,fontWeight: FontWeight.bold),),
-             headline4: GoogleFonts.cabinSketch(textStyle:TextStyle(color:Colors.amber,fontSize: 30,fontWeight: FontWeight.w600) ),
-             headline3: GoogleFonts.cabinSketch(textStyle: TextStyle(color: Theme.of(context).primaryColor,fontSize: 30,fontWeight: FontWeight.w500)),
-             headline2: GoogleFonts.cabinSketch(textStyle: TextStyle(color: Colors.black,fontSize: 20,fontWeight: FontWeight.w500)),
-
+             headline6:GoogleFonts.abel(textStyle :TextStyle(fontSize: 12)),
+             headline5:GoogleFonts.abel(textStyle :TextStyle(color: Theme.of(context).primaryColor,fontSize: 28,fontWeight: FontWeight.bold),),
+             headline4: GoogleFonts.abel(textStyle:TextStyle(color:Colors.amber,fontSize: 30,fontWeight: FontWeight.w600) ),
+             headline3: GoogleFonts.abel(textStyle: TextStyle(color: Theme.of(context).primaryColor,fontSize: 30,fontWeight: FontWeight.w500)),
+             headline2: GoogleFonts.abel(textStyle: TextStyle(color: Colors.black,fontSize: 20,fontWeight: FontWeight.w500)),
+             button: TextStyle(color: Colors.white),
     ),
-         appBarTheme: AppBarTheme( color:Colors.teal ,titleTextStyle:GoogleFonts.cabinSketch(textStyle:TextStyle(fontSize: 22,color: Colors.white70)))
+         appBarTheme: AppBarTheme( color:Colors.teal ,titleTextStyle:GoogleFonts.abel(textStyle:TextStyle(fontSize: 22,color: Colors.white))),
+
      ),
 
      home: Home(),

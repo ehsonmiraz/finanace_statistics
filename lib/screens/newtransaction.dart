@@ -27,6 +27,7 @@ class _NewTransactionState extends State<NewTransaction> {
 
     return Card(
       child: Container(
+        height: 280,
         padding: EdgeInsets.all(6),
         child:Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -34,7 +35,20 @@ class _NewTransactionState extends State<NewTransaction> {
           children: <Widget>[
             TextField(decoration: InputDecoration(hintText: 'Title'),controller: titleController,onSubmitted: (_)=> submitTransaction(),),
             TextField(decoration: InputDecoration(hintText: 'Amount'),controller:amountController,onSubmitted: (_)=>submitTransaction(),keyboardType: TextInputType.number,),
-            FlatButton(onPressed:submitTransaction, child: Text('\nSubmit Transaction\n',style: TextStyle(color:Colors.blueAccent),)),
+            Row(
+              children: <Widget>[
+                Text("No date choosen"),
+                FlatButton(
+                  child:Text("Choose date",style: TextStyle(fontWeight:FontWeight.bold, color: Theme.of(context).primaryColor),) ,
+                  onPressed: (){},
+
+                ),
+              ],
+            ),
+            RaisedButton(
+                color: Theme.of(context).primaryColor,
+                onPressed: submitTransaction,
+                child: Text('Submit Transaction',style: TextStyle(color:Colors.white),)),
           ],
         ),
       ),

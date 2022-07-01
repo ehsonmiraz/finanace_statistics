@@ -1,5 +1,5 @@
 import 'package:finanace_statistics/models/transaction.dart';
-import 'package:finanace_statistics/screens/trasnsactiontemplate.dart';
+import 'package:finanace_statistics/screens/templates/trasnsactiontemplate.dart';
 import 'package:flutter/material.dart';
 
 

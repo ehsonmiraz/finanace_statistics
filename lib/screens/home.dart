@@ -1,3 +1,4 @@
+import 'package:finanace_statistics/screens/chart.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'newtransaction.dart';
@@ -27,7 +28,12 @@ class _HomeSate extends State<Home>{
    showModalBottomSheet(context: ctx, builder: (bCtx)=> NewTransaction(addTransaction: addTransaction,));
 
  }
-
+List<Transaction> get recentTransactions{
+   return transactions.where(
+           (tx) { return tx.date.isAfter(DateTime.now().subtract(Duration(days: 7)));  }
+               ).toList();
+}
+ 
  Widget build(BuildContext context){
     return Scaffold(
         appBar: AppBar(
@@ -38,16 +44,7 @@ class _HomeSate extends State<Home>{
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget> [
-        Container(
-          width:double.infinity,
-          height: 35,
-          child:Card(
-            color: Colors.blueAccent,
-            child: Text('Chart'),
-            elevation: 6,
-          ),
-        ),
-
+        Chart(recentTransactions),
         transactions.isNotEmpty ? TransactionList(transactions: transactions): Container(
           child: Column(
             children: [
