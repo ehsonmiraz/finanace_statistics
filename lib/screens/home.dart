@@ -17,10 +17,13 @@ class _HomeSate extends State<Home>{
 /*Transaction(id: '001', title: 'Leather Shoes', amount: 1200, date: DateTime.now() ),
   Transaction(id: '002', title: 'Sports Bra', amount: 800, date: DateTime.now() ),
     */
+void deleteTransaction(String id){
+  setState((){transactions.removeWhere((tx) => tx.id==id);});
 
- void addTransaction(String title, double amount){
+}
+ void addTransaction(String title, double amount, DateTime datePicked){
    setState((){
-     transactions.add(Transaction(id: DateTime.now().toString(), title: title, amount: amount, date: DateTime.now()));
+     transactions.add(Transaction(id: DateTime.now().toString(), title: title, amount: amount, date: datePicked));
      Navigator.pop(context);
    });
    }
@@ -35,19 +38,27 @@ List<Transaction> get recentTransactions{
 }
  
  Widget build(BuildContext context){
+  final appBar=AppBar(
+    title: Text('Expense Calculator'),
+    actions: <Widget>[IconButton(onPressed:() => startNewTransaction(context), icon: Icon(Icons.add))],
+  );
+  final panelHeight=(MediaQuery.of(context).size.height- appBar.preferredSize.height);
     return Scaffold(
-        appBar: AppBar(
-        title: Text('Expense Calculator'),
-        actions: <Widget>[IconButton(onPressed:() => startNewTransaction(context), icon: Icon(Icons.add))],
-   ),
-   body:Column(
+        appBar: appBar,
+        body:Column(
+
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget> [
-        Chart(recentTransactions),
-        transactions.isNotEmpty ? TransactionList(transactions: transactions): Container(
+        Container(
+            height:panelHeight*0.25,
+            child: Chart(recentTransactions)
+   ),
+   transactions.isNotEmpty ? Container(
+   height:panelHeight*0.70,
+   child: TransactionList(transactions: transactions, deleteTransaction: deleteTransaction,)): Container(
           child: Column(
-            children: [
+            children: <Widget>[
               Text('No transaction yet ! Add transaction now.',style:Theme.of(context).textTheme.headline2),
               SizedBox(height: 18,),
               Image.asset('assets/images/No_Transaction.png',fit: BoxFit.cover,),

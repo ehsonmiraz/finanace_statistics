@@ -5,7 +5,8 @@ import '../../models/transaction.dart';
 
 class TransactionCard extends StatelessWidget{
   Transaction tx;
-  TransactionCard(this.tx);
+  Function(String id) deleteTransaction;
+  TransactionCard(this.tx,this.deleteTransaction);
   Widget build(BuildContext context){
      return Card(
          color: Colors.white,
@@ -22,7 +23,7 @@ class TransactionCard extends StatelessWidget{
            ),
            title:Text(tx.title,style: Theme.of(context).textTheme.headline3,) ,
            subtitle:Text(DateFormat.yMMMd().format(tx.date),style: TextStyle(color: Colors.grey,fontSize: 13,fontWeight: FontWeight.bold)) ,
-
+           trailing: IconButton(icon: Icon(Icons.delete_forever,),onPressed: (){deleteTransaction(tx.id);},),
 
 
          )

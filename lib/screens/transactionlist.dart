@@ -5,13 +5,14 @@ import 'package:flutter/material.dart';
 
 class TransactionList extends StatelessWidget{
   List <Transaction> transactions;
-  TransactionList({ Key? key ,required this.transactions}) : super(key: key);
+  Function(String id ) deleteTransaction;
+  TransactionList({ Key? key ,required this.transactions, required this.deleteTransaction}) : super(key: key);
   Widget build(BuildContext context){
     return Container(
-      height: 400,
+      
       child: ListView.builder(
         itemBuilder: (context,index){
-          return TransactionCard(transactions[index]);
+          return TransactionCard(transactions[index],deleteTransaction);
         },
         itemCount: transactions.length,
       ),

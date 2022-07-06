@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 class NewTransaction extends StatefulWidget {
-  final Function(String title, double amount) addTransaction;
+  final Function(String title, double amount, DateTime datePicked) addTransaction;
     NewTransaction({Key? key,
     required this.addTransaction }) : super(key: key);
 
@@ -10,18 +11,26 @@ class NewTransaction extends StatefulWidget {
 
 class _NewTransactionState extends State<NewTransaction> {
   final titleController = TextEditingController();
-
   final amountController = TextEditingController();
-
+  DateTime? datePicked;
   void submitTransaction(){
+
     final String title=titleController.text;
     final double amount= double.parse(amountController.text);
     if(title.length<=0 || amount<=0 )
       return;
 
-    widget.addTransaction(title,amount);
+    widget.addTransaction(title,amount,datePicked!);
   }
+  
+  void _presentDatePicker(){
+    showDatePicker(context: context, initialDate: DateTime.now(), firstDate: DateTime(2019), lastDate: DateTime.now()).then((value) {
+    setState((){
+      datePicked=value!;
+    })  ;
 
+    });
+  }
   @override
   Widget build(BuildContext context) {
 
@@ -37,10 +46,10 @@ class _NewTransactionState extends State<NewTransaction> {
             TextField(decoration: InputDecoration(hintText: 'Amount'),controller:amountController,onSubmitted: (_)=>submitTransaction(),keyboardType: TextInputType.number,),
             Row(
               children: <Widget>[
-                Text("No date choosen"),
+                datePicked!=null? Text("Date picked ${DateFormat.yMd().format(datePicked!)}") :Text("No date choosen"),
                 FlatButton(
                   child:Text("Choose date",style: TextStyle(fontWeight:FontWeight.bold, color: Theme.of(context).primaryColor),) ,
-                  onPressed: (){},
+                  onPressed: _presentDatePicker,
 
                 ),
               ],
