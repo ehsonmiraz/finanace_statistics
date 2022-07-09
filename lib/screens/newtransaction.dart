@@ -34,31 +34,33 @@ class _NewTransactionState extends State<NewTransaction> {
   @override
   Widget build(BuildContext context) {
 
-    return Card(
-      child: Container(
-        height: 280,
-        padding: EdgeInsets.all(6),
-        child:Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: <Widget>[
-            TextField(decoration: InputDecoration(hintText: 'Title'),controller: titleController,onSubmitted: (_)=> submitTransaction(),),
-            TextField(decoration: InputDecoration(hintText: 'Amount'),controller:amountController,onSubmitted: (_)=>submitTransaction(),keyboardType: TextInputType.number,),
-            Row(
-              children: <Widget>[
-                datePicked!=null? Text("Date picked ${DateFormat.yMd().format(datePicked!)}") :Text("No date choosen"),
-                FlatButton(
-                  child:Text("Choose date",style: TextStyle(fontWeight:FontWeight.bold, color: Theme.of(context).primaryColor),) ,
-                  onPressed: _presentDatePicker,
+    return SingleChildScrollView(
+      child: Card(
+        child: Container(
+          //height: MediaQuery.of(context).size.height*0.45,
+          padding: EdgeInsets.only(top:5,left: 5,right:5,bottom: MediaQuery.of(context).viewInsets.bottom+30),
+          child:Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: <Widget>[
+              TextField(decoration: InputDecoration(hintText: 'Title'),controller: titleController,onSubmitted: (_)=> submitTransaction(),),
+              TextField(decoration: InputDecoration(hintText: 'Amount'),controller:amountController,onSubmitted: (_)=>submitTransaction(),keyboardType: TextInputType.number,),
+              Row(
+                children: <Widget>[
+                  datePicked!=null? Text("Date picked ${DateFormat.yMd().format(datePicked!)}") :Text("No date choosen"),
+                  FlatButton(
+                    child:Text("Choose date",style: TextStyle(fontWeight:FontWeight.bold, color: Theme.of(context).primaryColor),) ,
+                    onPressed: _presentDatePicker,
 
-                ),
-              ],
-            ),
-            RaisedButton(
-                color: Theme.of(context).primaryColor,
-                onPressed: submitTransaction,
-                child: Text('Submit Transaction',style: TextStyle(color:Colors.white),)),
-          ],
+                  ),
+                ],
+              ),
+              RaisedButton(
+                  color: Theme.of(context).primaryColor,
+                  onPressed: submitTransaction,
+                  child: Text('Submit Transaction',style: TextStyle(color:Colors.white),)),
+            ],
+          ),
         ),
       ),
     );

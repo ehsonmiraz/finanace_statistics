@@ -8,14 +8,18 @@ class TransactionList extends StatelessWidget{
   Function(String id ) deleteTransaction;
   TransactionList({ Key? key ,required this.transactions, required this.deleteTransaction}) : super(key: key);
   Widget build(BuildContext context){
-    return Container(
-      
-      child: ListView.builder(
-        itemBuilder: (context,index){
-          return TransactionCard(transactions[index],deleteTransaction);
-        },
-        itemCount: transactions.length,
-      ),
-    );
+
+    return  LayoutBuilder(builder: (context, constraints){
+      return  Container(
+
+        child: ListView.builder(
+          itemBuilder: (context,index){
+            return TransactionCard(transactions[index],deleteTransaction);
+          },
+          itemCount: transactions.length,
+        ),
+      );
+    });
+
   }
 }

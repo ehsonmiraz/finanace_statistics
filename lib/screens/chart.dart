@@ -37,7 +37,7 @@ class Chart extends StatelessWidget{
        //color: Colors.tealAccent,
        child: Row(
          children: groupedTransaction.map((tx){
-             return ChartBar(label: tx['day'].toString(), amount: (tx['amount'] as double),percentageSpent:totalSpending!=0?(tx['amount'] as double)/totalSpending:0.0);
+             return ChartBar(label: tx['day'].toString(), amount: (tx['amount'] as double),percentageSpent:totalSpending!=0.0?(tx['amount'] as double)/totalSpending:0.0);
          }).toList(),
        ),
      );
