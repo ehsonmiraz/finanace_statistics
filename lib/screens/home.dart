@@ -70,28 +70,39 @@ class _HomeSate extends State<Home>{
       ],
     ),
   ) ;
+   List<Widget> _buildLandscape(){
+     return [
+       Row(
+         mainAxisAlignment: MainAxisAlignment.center,
+         children: [
+           Text("Show chart"),
+           Switch(value: _showChart, onChanged: (value){setState(()=> _showChart=value);}),
+         ],
+       ),//show switch only in lanscape mode
+       _showChart? Container(
+           height:panelHeight*0.75,
+           child: Chart(recentTransactions)
+       ): txListWidget // if lanscape then either show chart or txlist controlled by switch
+
+     ];
+   }
+   List<Widget> _buildPortrait(){
+     return [
+       Container(
+           height:panelHeight*0.25,
+           child: Chart(recentTransactions)
+     ),//if portrait then show chart with less length
+       txListWidget //if portrait show tx list below above chart
+      ];
+
+   }
   final pageBody= SingleChildScrollView(
     child: Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget> [
-        if(_isLandscape) Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text("Show chart"),
-            Switch(value: _showChart, onChanged: (value){setState(()=> _showChart=value);}),
-          ],
-        ),//show switch only in lanscape mode
-        if(!_isLandscape) Container(
-            height:panelHeight*0.25,
-            child: Chart(recentTransactions)
-        ),//if portrait then show chart with less length
-        if(!_isLandscape)  txListWidget,// if portrait show tx list below above chart
-        if(_isLandscape) _showChart? Container(
-            height:panelHeight*0.75,
-            child: Chart(recentTransactions)
-        ): txListWidget// if lanscape then either show chart or txlist controlled by switch
-
+        if(_isLandscape) ..._buildLandscape(),
+        if(!_isLandscape) ..._buildPortrait(),
       ],
     ),
   );
